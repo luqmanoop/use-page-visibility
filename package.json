@@ -1,0 +1,38 @@
+{
+  "name": "use-page-visibility",
+  "version": "1.0.0",
+  "description": "React hook for detecting page visibility 👁️",
+  "source": "lib.js",
+  "main": "dist/lib.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "bundle": "npm run clean && microbundle --external react,react-dom -f es --sourcemap false --compress false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeshifu/use-page-visibility.git"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "page visiblity",
+    "visibilityState"
+  ],
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "author": "Luqman Olushi <olushilukmon03@gmail.com> (https://codeshifu.github.io/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeshifu/use-page-visibility/issues"
+  },
+  "homepage": "https://github.com/codeshifu/use-page-visibility#readme",
+  "devDependencies": {
+    "microbundle": "^0.11.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "rimraf": "^3.0.0"
+  }
+}
