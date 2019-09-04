@@ -88,3 +88,4 @@ typings/
 .dynamodb/
 
 dist
+package
