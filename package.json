@@ -1,6 +1,6 @@
 {
   "name": "use-page-visibility",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Dead-simple, zero-config React hook lib for detecting page visibility 👁️",
   "source": "lib.js",
   "main": "dist/lib.js",
