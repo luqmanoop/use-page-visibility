@@ -1,13 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-export default function usePageVisibility(delay) {
-  const [visible, setVisible] = useState(true);
+export default function usePageVisibility(cb, delay) {
   const timeoutId = useRef(null);
 
   useEffect(() => {
-    const updateVisibility = () =>
-      document.hidden ? setVisible(false) : setVisible(true);
-
     const cleanupTimeout = () => clearTimeout(timeoutId.current);
 
     const handleVisibilityChange = () => {
@@ -17,9 +13,9 @@ export default function usePageVisibility(delay) {
         }
 
         if (timeoutId.current) cleanupTimeout();
-        timeoutId.current = setTimeout(() => updateVisibility(), delay);
+        timeoutId.current = setTimeout(() => cb(document.hidden), delay);
       } else {
-        updateVisibility();
+        cb(document.hidden)
       }
     };
 
@@ -29,6 +25,4 @@ export default function usePageVisibility(delay) {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
-
-  return visible;
 }
