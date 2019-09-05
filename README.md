@@ -2,6 +2,9 @@
 
 Dead-simple, zero-config React hook lib for detecting page visibility 👁️
 
+## Demo
+https://use-page-visibility.netlify.com
+
 ## Prerequisite
 
 - [React 16.8+](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html)
