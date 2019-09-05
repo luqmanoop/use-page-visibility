@@ -1,6 +1,6 @@
 # use-page-visibility
 
-Dead-simple, zero-config React hook lib for detecting page visibility 👁️
+Dead-simple, zero-dependency React hook lib for detecting page visibility 👁️
 
 ## Demo
 https://use-page-visibility.netlify.com
