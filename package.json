@@ -2,13 +2,14 @@
   "name": "use-page-visibility",
   "version": "2.0.0",
   "description": "Dead-simple, zero-config React hook lib for detecting page visibility 👁️",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "source": "lib.js",
-  "main": "dist/lib.js",
-  "module": "dist/lib.m.js",
   "scripts": {
     "clean": "rimraf dist",
-    "bundle": "npm run clean && microbundle --external react,react-dom -f es --sourcemap false --compress false",
-    "release": "npm run bundle && np"
+    "bundle": "rollup -c",
+    "build": "npm-run-all clean bundle",
+    "release": "npm run build && np"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,6 @@
   ],
   "files": [
     "dist",
-    "LICENSE.md",
     "README.md"
   ],
   "author": "Luqman Olushi <olushilukmon03@gmail.com> (https://codeshifu.github.io/)",
@@ -32,10 +32,22 @@
   },
   "homepage": "https://github.com/codeshifu/use-page-visibility#readme",
   "devDependencies": {
-    "microbundle": "^0.11.0",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "np": "^3.1.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "rimraf": "^3.0.0"
+    "npm-run-all": "^4.1.5",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.x",
+    "react-dom": "^16.8.x"
   }
 }
