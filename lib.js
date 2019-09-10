@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function usePageVisibility(cb = () => {}, delay) {
+export default function usePageVisibility(cb, delay) {
   const timeoutId = useRef(null);
+  const callbackRef = useRef();
 
   const browserCompatApi = () => {
     let hidden, visibilityChange;
@@ -22,10 +23,17 @@ export default function usePageVisibility(cb = () => {}, delay) {
   }
 
   const cleanupTimeout = () => clearTimeout(timeoutId.current);
+  const invokeCallback = visiblity => callbackRef.current(!visiblity);
+
+  useEffect(() => {
+    callbackRef.current = cb;
+  })
 
   useEffect(() => {
     const { hidden, visibilityChange } = browserCompatApi();
     
+    if (typeof cb !== 'function') throw new Error('callback must be a function')
+
     const handleVisibilityChange = () => {
       if (delay) {
         if (typeof delay !== 'number' || delay < 0) {
@@ -33,9 +41,9 @@ export default function usePageVisibility(cb = () => {}, delay) {
         }
 
         if (timeoutId.current) cleanupTimeout();
-        timeoutId.current = setTimeout(() => cb(document[hidden]), delay);
+        timeoutId.current = setTimeout(() => invokeCallback(document[hidden]), delay);
       } else {
-        cb(document[hidden])
+        invokeCallback(document[hidden]);
       }
     };
 
