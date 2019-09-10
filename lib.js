@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 
 export default function usePageVisibility(cb, delay) {
   const timeoutId = useRef(null);
-  const callbackRef = useRef();
 
   const browserCompatApi = () => {
     let hidden, visibilityChange;
@@ -23,11 +22,6 @@ export default function usePageVisibility(cb, delay) {
   }
 
   const cleanupTimeout = () => clearTimeout(timeoutId.current);
-  const invokeCallback = visiblity => callbackRef.current(!visiblity);
-
-  useEffect(() => {
-    callbackRef.current = cb;
-  })
 
   useEffect(() => {
     const { hidden, visibilityChange } = browserCompatApi();
@@ -37,13 +31,13 @@ export default function usePageVisibility(cb, delay) {
     const handleVisibilityChange = () => {
       if (delay) {
         if (typeof delay !== 'number' || delay < 0) {
-          throw new Error('Delay must be a positive integer');
+          throw new Error('delay must be a positive integer');
         }
 
         if (timeoutId.current) cleanupTimeout();
-        timeoutId.current = setTimeout(() => invokeCallback(document[hidden]), delay);
+        timeoutId.current = setTimeout(() => cb(!document[hidden]), delay);
       } else {
-        invokeCallback(document[hidden]);
+        cb(!document[hidden]);
       }
     };
 
@@ -52,5 +46,5 @@ export default function usePageVisibility(cb, delay) {
     return () => {
       document.removeEventListener(visibilityChange, handleVisibilityChange);
     };
-  }, []);
+  }, [cb]);
 }
