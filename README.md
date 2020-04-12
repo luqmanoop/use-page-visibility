@@ -28,14 +28,13 @@ yarn add use-page-visibility
 import usePageVisibility from 'use-page-visibility';
 
 function App() {
-  const handleVisibilityChange = (visible) => {
-    if (visible) playVideo();
-    else pauseVideo();
+  const handleVisibilityChange = visible => {
+    return visible ? playVideo() : pauseVideo()
   }
 
   usePageVisibility(handleVisibilityChange); 
 
-  return ...
+  return (...)
 }
 ```
 
